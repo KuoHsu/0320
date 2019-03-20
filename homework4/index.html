@@ -14,28 +14,34 @@
 
     </body>
     <script>
-       var f = (function(){
-            var x = 0,y=0;
+        var c = document.getElementById("myCanvas");
+        var t = c.getContext("2d");
+        t.fillStyle = '#333';
+        t.fillRect(0,0,1000,700);
+       var f = (function(sx,sy,w,h,color){
+            var x = sx,y = sy;
             var xs = 1,ys=1;
-            var c = document.getElementById("myCanvas");
-            var t = c.getContext("2d");
-            t.fillStyle = '#333';
-            t.fillRect(0,0,1000,700);
-            t.fillStyle = "#fff";
+            var _w = w,_h = h;
+            var _color = color;
+            t.fillStyle = _color;
             return function(mx,my){
                 console.log(mx,my);
                 t.fillStyle = '#333';
-                t.fillRect(x,y,50,50);   
+                t.fillRect(x,y,w,h);   
                 x+= (mx * xs);
                 y+= (my * ys);
-                if (x == 950 || x == 0){xs *=-1;}
-                if (y == 650 || y == 0){ys *=-1;}
-                t.fillStyle = "#fff";
-                t.fillRect(x,y,50,50);
+                if (x >= 1000 - _w || x <= 0){xs *=-1;}
+                if (y >= 700 - _h || y <= 0){ys *=-1;}
+                t.fillStyle = _color;
+                t.fillRect(x,y,w,h);
             }
        });
-       var action = f();
-       setInterval(function(){action(5,5);},10);
+       var action1 = f(900,0,50,50,"#fff");
+       var action2 = f(0,0,100,100,"#f00");
+       var action3 = f(500,0,25,25,"#ff0");
+       setInterval(function(){action1(10,10);},500);
+       setInterval(function(){action2(10,10);},125);
+       setInterval(function(){action3(10,10);},250);
       
    </script>
 </html>
