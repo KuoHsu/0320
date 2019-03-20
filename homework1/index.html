@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <script>
+    /*copy from https://snippetinfo.net/mobile/media/1912*/
+    Number.prototype.numberFormat = function(c, d, t){
+        var n = this, 
+        c = isNaN(c = Math.abs(c)) ? 2 : c, 
+        d = d == undefined ? "." : d, 
+        t = t == undefined ? "," : t, 
+        s = n < 0 ? "-" : "", 
+        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+        j = (j = i.length) > 3 ? j % 3 : 0;
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    }; 
+    function calculate(number1,number2,sign){
+        switch(sign){
+            case '+':
+                return number1 + number2;
+                break;
+            case '-':
+                return number1 - number2;
+                break;
+            case '*':
+                return number1 * number2;
+                break;
+            case '/':
+                return number1 / number2;
+                break;
+            case '%':
+                return number1 % number2;
+                break;
+            case '^':
+                return number1 ** number2;
+                break;
+        }
+    };
+    function _click(sign){
+        var number1 = 0, number2 = 0;
+        number1 = parseInt(document.getElementById('number1').value);
+        number2 = parseInt(document.getElementById('number2').value);
+        console.log(number1,number2);
+        var r = calculate(number1,number2,sign).numberFormat(0,'.',',');
+        document.getElementById('result').innerHTML = r;
+    }
+    function _clear(){
+        document.getElementById('number1').value = '';
+        document.getElementById('number2').value = '';
+        document.getElementById('result').innerHTML = 0;
+    }
+    
+    
+
+    </script>
+    <body>
+        <div id="calculator">
+            <input type="text" id="number1">
+            <input type="text" id="number2">
+            <button onclick="_click('+')">+</button>
+            <button onclick="_click('-')">-</button>
+            <button onclick="_click('*')">*</button>
+            <button onclick="_click('/')">/</button>
+            <button onclick="_click('%')">%</button>
+            <button onclick="_click('^')">^</button>
+            <div id="result">0</div>
+            <button onclick="_clear()" id="clear" style="color: #ff2525;width: 100px;">C</button>
+        </div>
+    </body>
+    
+</html>

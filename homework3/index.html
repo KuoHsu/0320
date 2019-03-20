@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+    </head>
+   <script>
+       function check(){
+           var score = parseInt(document.getElementById("score_input").value);
+           var s = "Good";
+           if (score < 60){s = "You can get better";}
+           if (score >= 100){s = "Amazing!!!";}
+           if (score < 0){s = "Serious?";}
+           document.getElementById("result").innerHTML = s;
+       }
+   </script>
+   <style>
+   *{
+       font-size: 70px;
+   }
+   </style>
+    <body>
+        <input type="text" value="0" id="score_input">
+        <button onclick="check()">判定</button>
+        <div id="result"></div>
+    </body>
+    
+</html>
