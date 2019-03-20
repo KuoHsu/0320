@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+    </head>
+   
+  <style>
+  *{
+      text-align: center;
+  }
+  </style>
+    <body>
+       <canvas id = "myCanvas" width="1000" height="700" style="border:1px solid #000"></canvas>
+
+    </body>
+    <script>
+       var f = (function(){
+            var x = 0,y=0;
+            var xs = 1,ys=1;
+            var c = document.getElementById("myCanvas");
+            var t = c.getContext("2d");
+            t.fillStyle = '#333';
+            t.fillRect(0,0,1000,700);
+            t.fillStyle = "#fff";
+            return function(mx,my){
+                console.log(mx,my);
+                t.fillStyle = '#333';
+                t.fillRect(x,y,50,50);   
+                x+= (mx * xs);
+                y+= (my * ys);
+                if (x == 950 || x == 0){xs *=-1;}
+                if (y == 650 || y == 0){ys *=-1;}
+                t.fillStyle = "#fff";
+                t.fillRect(x,y,50,50);
+            }
+       });
+       var action = f();
+       setInterval(function(){action(5,5);},10);
+      
+   </script>
+</html>
